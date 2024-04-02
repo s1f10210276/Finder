@@ -1,9 +1,12 @@
 img {
+    box-shadow: 6px 5px 5px #ccc;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    margin: 20px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 img:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    opacity: 0.67;
     z-index: 10;
 }
