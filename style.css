@@ -1,5 +1,9 @@
-img:hover {
+img {
     cursor: pointer;
-    opacity: .67;
-    transition: opacity .2s
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.1);
+    z-index: 10;
 }

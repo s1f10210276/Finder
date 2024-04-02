@@ -13,7 +13,9 @@ const imageFilenames = [
     'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiob6LYxPAqCSSXuLzaPwi5FWZy1SJeOc7AyRr0Sq2V9LeIE8hpoUbxGfkeLvTIWXYJ9OgNVoQkVuv-EkqlsOOaBHLaFmJzJb6CvWmvz3lSW4B-wEmBm_TQvuN7bANcOJDWp1QlS0MXDKk/s800/youngwoman_48.png',
 ];
 
+let usedImageFilenames = [];
 let displayCounter = 5;
+let isResultDisplayed = false;
 
 function displayInitialImages() {
     const images = pickRandomImages();
@@ -26,13 +28,14 @@ function displayInitialImages() {
 }
 
 function updateImages() {
+    if (isResultDisplayed) return;
     if (displayCounter > 1) {
         const images = pickRandomImages();
         const imageContainer = document.getElementById('images-container');
         imageContainer.innerHTML = `
         <img class="card card-img-top" src="${images[0]}" alt="選択肢1">
         <img class="card card-img-top" src="${images[1]}" alt="選択肢2">
-      `;
+        `;
 
         displayCounter--;
         document.getElementById('click-counter').innerText = `あと${displayCounter}回クリック`;
@@ -54,27 +57,41 @@ function showResult() {
     againButton.classList.add("btn", "btn-primary", "mt-4");
     againButton.onclick = reset;
     clickCounter.appendChild(againButton);
+
+    isResultDisplayed = true;
 }
 
 function pickRandomImages() {
     let randomImages = [];
-    while (randomImages.length < 2) {
-        let randomIndex = Math.floor(Math.random() * imageFilenames.length);
-        let imageFilename = imageFilenames[randomIndex];
-        if (!randomImages.includes(imageFilename)) {
-            randomImages.push(imageFilename);
-        }
+    let possibleFilenames = imageFilenames.filter(fn => !usedImageFilenames.includes(fn));
+
+    if (possibleFilenames.length < 2) {
+        resetImages();
+        possibleFilenames = imageFilenames.filter(fn => !usedImageFilenames.includes(fn));
+    }
+
+    for (let i = 0; i < 2; i++) {
+        let randomIndex = Math.floor(Math.random() * possibleFilenames.length);
+        let imageFilename = possibleFilenames.splice(randomIndex, 1)[0];
+        randomImages.push(imageFilename);
+        usedImageFilenames.push(imageFilename);
     }
     return randomImages;
 }
 
 function reset() {
     displayCounter = 5;
+    isResultDisplayed = false;
+    usedImageFilenames = [];
     displayInitialImages();
 }
 
-reset();
+function resetImages() {
+    usedImageFilenames = [];
+}
 
+
+reset();
 document.getElementById('images-container').addEventListener('click', (event) => {
     if (event.target.tagName === 'IMG') {
         updateImages();
