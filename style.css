@@ -1,12 +1,11 @@
-img {
+.card-img-top {
+    transition: transform 0.1s ease, opacity 0.1s ease;
     box-shadow: 6px 5px 5px #ccc;
     cursor: pointer;
     margin: 10px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-img:hover {
+.image-scale {
     transform: scale(1.05);
     opacity: 0.67;
-    z-index: 10;
 }

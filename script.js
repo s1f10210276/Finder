@@ -1,3 +1,20 @@
+const img = document.getElementById('myImage');
+img.addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    this.classList.add('image-scale');
+
+    setTimeout(() => {
+        this.classList.remove('image-scale');
+    }, 100);
+});
+
+img.addEventListener('touchcancel', function () {
+    this.classList.remove('image-scale');
+});
+img.addEventListener('touchend', function () {
+    this.classList.remove('image-scale');
+});
+
 const imageFilenames = [
     'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBfolqi8tlqY4yVXJbvVGCJwT0c7ADx9Mv8VCS7kcQDHplaYitvwd3NSDD3lLLky5Et_mBTDiWGKEYvIW9y28CpDjIzwcd0f6O2ss0MZkY7PO8bX7VHiaFy2Zxv4O7QsWIVhwQILyWQYo/s800/youngwoman_37.png',
     'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLZYnoToaAbYd9_fC_Uwkk7DDXFQ3N6dyRAibzxaWAoTkT-8cfufyieZpsBU94hbHUE2bbTsFHDANkI0R-_WgLKxH2g0cD5fSVpyM3B-q3ClYtC4HlFG3XXabnZ1UQQ7ZBfmQh6VTeOzA/s800/youngwoman_38.png',
@@ -13,8 +30,8 @@ const imageFilenames = [
     'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiob6LYxPAqCSSXuLzaPwi5FWZy1SJeOc7AyRr0Sq2V9LeIE8hpoUbxGfkeLvTIWXYJ9OgNVoQkVuv-EkqlsOOaBHLaFmJzJb6CvWmvz3lSW4B-wEmBm_TQvuN7bANcOJDWp1QlS0MXDKk/s800/youngwoman_48.png',
 ];
 
-let usedImageFilenames = [];
 let displayCounter = 5;
+let availableIndices = Array.from(imageFilenames.keys());
 let isResultDisplayed = false;
 
 function displayInitialImages() {
@@ -29,67 +46,61 @@ function displayInitialImages() {
 
 function updateImages() {
     if (isResultDisplayed) return;
-    if (displayCounter > 1) {
-        const images = pickRandomImages();
-        const imageContainer = document.getElementById('images-container');
-        imageContainer.innerHTML = `
-        <img class="card card-img-top" src="${images[0]}" alt="選択肢1">
-        <img class="card card-img-top" src="${images[1]}" alt="選択肢2">
-        `;
 
-        displayCounter--;
-        document.getElementById('click-counter').innerText = `あと${displayCounter}回クリック`;
-    } else {
-        showResult();
-    }
+    setTimeout(() => {
+        if (displayCounter > 0) {
+            const images = pickRandomImages();
+            const imageContainer = document.getElementById('images-container');
+            imageContainer.innerHTML = `
+            <img class="card card-img-top" src="${images[0]}" alt="選択肢1" />
+            <img class="card card-img-top" src="${images[1]}" alt="選択肢2" />
+            `;
+
+            displayCounter--;
+            document.getElementById('click-counter').innerText = `あと${displayCounter}回クリック`;
+        } else {
+            showResult();
+        }
+    }, 200);
 }
 
 function showResult() {
     const images = pickRandomImages();
     const imageContainer = document.getElementById('images-container');
-    imageContainer.innerHTML = `<img class="card card-img-top" src="${images[0]}" alt="診断結果">`;
+    imageContainer.innerHTML = `<img class="card" src="${images[0]}" alt="診断結果">`;
 
-    const clickCounter = document.getElementById('click-counter');
-    clickCounter.innerText = '';
+    document.getElementById('click-counter').innerText = '';
 
     const againButton = document.createElement("button");
     againButton.textContent = "もう一度";
     againButton.classList.add("btn", "btn-primary", "mt-4");
     againButton.onclick = reset;
-    clickCounter.appendChild(againButton);
+    document.getElementById('click-counter').appendChild(againButton);
 
     isResultDisplayed = true;
 }
 
 function pickRandomImages() {
     let randomImages = [];
-    let possibleFilenames = imageFilenames.filter(fn => !usedImageFilenames.includes(fn));
-
-    if (possibleFilenames.length < 2) {
-        resetImages();
-        possibleFilenames = imageFilenames.filter(fn => !usedImageFilenames.includes(fn));
-    }
 
     for (let i = 0; i < 2; i++) {
-        let randomIndex = Math.floor(Math.random() * possibleFilenames.length);
-        let imageFilename = possibleFilenames.splice(randomIndex, 1)[0];
-        randomImages.push(imageFilename);
-        usedImageFilenames.push(imageFilename);
+        if (availableIndices.length === 0) {
+            availableIndices = Array.from(imageFilenames.keys());
+        }
+        let randomIndex = Math.floor(Math.random() * availableIndices.length);
+        let selectedIndex = availableIndices.splice(randomIndex, 1)[0];
+        randomImages.push(imageFilenames[selectedIndex]);
     }
+
     return randomImages;
 }
 
 function reset() {
     displayCounter = 5;
     isResultDisplayed = false;
-    usedImageFilenames = [];
+    availableIndices = Array.from(imageFilenames.keys());
     displayInitialImages();
 }
-
-function resetImages() {
-    usedImageFilenames = [];
-}
-
 
 reset();
 document.getElementById('images-container').addEventListener('click', (event) => {
