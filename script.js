@@ -176,7 +176,38 @@ function updateImages() {
 function showResult() {
     const images = pickRandomImages();
     const imageContainer = document.getElementById('images-container');
-    imageContainer.innerHTML = `<img class="card" src="${images[0]}" alt="診断結果">`;
+    imageContainer.innerHTML = `
+    <img class="card" src="${images[0]}" alt="診断結果">
+    <canvas class="card" id="chart"></canvas>
+    `;
+    var chartElement = document.getElementById("chart");
+
+    var data = {
+        labels: [
+            '最近',
+            '現実性',
+            '活発',
+            '色気',
+            '正義'
+        ],
+        datasets: [{
+            label: false,
+            data: [Math.random() * 11, Math.random() * 11, Math.random() * 11, Math.random() * 11, Math.random() * 11],
+            fill: true,
+        }]
+    }
+
+    var myRadarChart = new Chart(chartElement, {
+        type: 'radar',
+        data: data,
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
 
     document.getElementById('click-counter').innerText = '';
 
