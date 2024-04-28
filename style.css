@@ -1,11 +1,18 @@
-.card-img-top {
-    transition: transform 0.1s ease, opacity 0.1s ease;
-    box-shadow: 6px 5px 5px #ccc;
-    cursor: pointer;
-    margin: 10px;
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000 !important;
+        color: #fff !important;
+    }
 }
 
-.image-scale {
-    transform: scale(1.05);
-    opacity: 0.67;
+canvas {
+    background-color: #fff;
+}
+
+img {
+    transition: transform 0.1s ease, opacity 0.1s ease;
+    box-shadow: 6px 5px 5px #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
 }

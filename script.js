@@ -1,20 +1,3 @@
-const img = document.getElementById('myImage');
-img.addEventListener('touchstart', function (e) {
-    e.preventDefault();
-    this.classList.add('image-scale');
-
-    setTimeout(() => {
-        this.classList.remove('image-scale');
-    }, 100);
-});
-
-img.addEventListener('touchcancel', function () {
-    this.classList.remove('image-scale');
-});
-img.addEventListener('touchend', function () {
-    this.classList.remove('image-scale');
-});
-
 const imageFilenames = [
     'https://lh3.googleusercontent.com/d/1FI_WabHEQiQqWakNcsnSSFVXzXxl5e-9',
     'https://lh3.googleusercontent.com/d/18j_MGaWchKYGu8UVMzwZGj9DGRnmb6hl',
@@ -147,48 +130,45 @@ function displayInitialImages() {
     const images = pickRandomImages();
     const imageContainer = document.getElementById('images-container');
     imageContainer.innerHTML = `
-    <img class="card card-img-top" src="${images[0]}" alt="選択肢1">
-    <img class="card card-img-top" src="${images[1]}" alt="選択肢2">
+    <img class="col-xs-12 col-sm-8 col-md-4" src="${images[0]}" alt="選択肢1">
+    <img class="col-xs-12 col-sm-8 col-md-4" src="${images[1]}" alt="選択肢2">
     `;
     document.getElementById('click-counter').innerText = `あと${displayCounter}回クリック`;
 }
 
 function updateImages() {
     if (isResultDisplayed) return;
-
-    setTimeout(() => {
-        if (displayCounter > 1) {
-            const images = pickRandomImages();
-            const imageContainer = document.getElementById('images-container');
-            imageContainer.innerHTML = `
-            <img class="card card-img-top" src="${images[0]}" alt="選択肢1" />
-            <img class="card card-img-top" src="${images[1]}" alt="選択肢2" />
+    else if (displayCounter > 1) {
+        const images = pickRandomImages();
+        const imageContainer = document.getElementById('images-container');
+        imageContainer.innerHTML = `
+            <img class="col-xs-12 col-sm-8 col-md-4" src="${images[0]}" alt="選択肢1" />
+            <img class="col-xs-12 col-sm-8 col-md-4" src="${images[1]}" alt="選択肢2" />
             `;
 
-            displayCounter--;
-            document.getElementById('click-counter').innerText = `あと${displayCounter}回クリック`;
-        } else {
-            showResult();
-        }
-    }, 200);
+        displayCounter--;
+        document.getElementById('click-counter').innerText = `あと${displayCounter}回クリック`;
+    } else {
+        showResult();
+    }
 }
 
 function showResult() {
     const images = pickRandomImages();
     const imageContainer = document.getElementById('images-container');
     imageContainer.innerHTML = `
-    <img class="card" src="${images[0]}" alt="診断結果">
-    <canvas class="card" id="chart"></canvas>
+    <img class="col-xs-12 col-sm-8 col-md-4" src="${images[0]}" alt="診断結果">
+    <canvas class="col-xs-12 col-sm-8 col-md-4" id="chart"></canvas>
     `;
     var chartElement = document.getElementById("chart");
 
     var data = {
         labels: [
-            '最近',
-            '現実性',
-            '活発',
+            '製作陣の推し度',
+            'ロリ度',
+            '陽気',
             '色気',
-            '正義'
+            '清楚'
         ],
         datasets: [{
             label: false,
