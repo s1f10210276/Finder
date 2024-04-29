@@ -172,7 +172,7 @@ function showResult() {
         ],
         datasets: [{
             label: false,
-            data: [Math.random() * 11, Math.random() * 11, Math.random() * 11, Math.random() * 11, Math.random() * 11],
+            data: [Math.floor(Math.random() * 11), Math.floor(Math.random() * 11), Math.floor(Math.random() * 11), Math.floor(Math.random() * 11), Math.floor(Math.random() * 11)],
             fill: true,
         }]
     }
@@ -185,8 +185,17 @@ function showResult() {
                 legend: {
                     display: false
                 }
+            },
+            scales: {
+                r: {
+                    min: 0,
+                    max: 10,
+                    ticks: {
+                        stepSize: 2,
+                    }
+                }
             }
-        }
+        },
     });
 
     document.getElementById('click-counter').innerText = '';
