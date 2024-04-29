@@ -4,19 +4,15 @@ const imageFilenames = [
     'https://lh3.googleusercontent.com/d/15eNnAW86F8_1jnpXsVx8k5AKQli4an09',
     'https://lh3.googleusercontent.com/d/1t2Br_Fnjcg8Kx_ESKmlQ8mMOFjlfy0Ai',
     'https://lh3.googleusercontent.com/d/1mEq5EnVmdWHUXaXlprzE6WiKfWTnFmhu',
-    'https://lh3.googleusercontent.com/d/1t-fKwyClTZyVr7dS1oKgPqlKnB5napDn',
     'https://lh3.googleusercontent.com/d/1QFCaoZlvhBkWZ5wv9RuYJgZah_lJqmU_',
     'https://lh3.googleusercontent.com/d/1epOPF0ET_fFa-Nx349dCfQ0glCQtdLXX',
     'https://lh3.googleusercontent.com/d/1i3VMisLvw_koQJpTWxhzyV-R1KpHFODK',
     'https://lh3.googleusercontent.com/d/1oLdEeWc3uYgYHrMPPSWEbAdfLD4GTeTN',
     'https://lh3.googleusercontent.com/d/1eflKl5ODhOBxOiRQ23ewoC20HIGU3f_U',
-    'https://lh3.googleusercontent.com/d/1tQRqRLdOXUT54lHziUz_VpDU4e30mz9H',
     'https://lh3.googleusercontent.com/d/1i38R-obHVvUSfiEasLMQEfA9xpOGfPbi',
-    'https://lh3.googleusercontent.com/d/1KrrXXWKUBmFdmO5F6S-quXIJqvbnhNQK',
     'https://lh3.googleusercontent.com/d/1woCuD6hexT0-XJIL1TzcC-UjZip8szqa',
     'https://lh3.googleusercontent.com/d/1Mq8-T0WCyVYbOmCoQlqvIkAMz8keDWWR',
     'https://lh3.googleusercontent.com/d/1cdABJCknivfXAUTIR9VOZHM4bmfkZPlN',
-    'https://lh3.googleusercontent.com/d/1edwKDIiCmwlEjv6N8De8RKt7jm0iqUM4',
     'https://lh3.googleusercontent.com/d/1Q6QpqmzRm0-BTONMg4KSC9AVOhQSbHaa',
     'https://lh3.googleusercontent.com/d/1f6TSEhdNPWml_sHORiGHz2YuRwlV-P0p',
     'https://lh3.googleusercontent.com/d/1ue4z9Ae0E2MHc6MaSBIrXGxGdh3Iveaw',
@@ -32,7 +28,6 @@ const imageFilenames = [
     'https://lh3.googleusercontent.com/d/1bpukqJCcSBS8JQIvJEgyv8nUe9k2o0Uw',
     'https://lh3.googleusercontent.com/d/183plSYLrXInZAaa9n9Px3z11sicn4aHh',
     'https://lh3.googleusercontent.com/d/18IANwbtNUyu_zOYUwdlvYIUC1RziOYWD',
-    'https://lh3.googleusercontent.com/d/1bHj5YxcBtmoht0_5yxulZeoi7IyNTeQY',
     'https://lh3.googleusercontent.com/d/1C2dNOE_VQgcRf8TcV2WyP4tzyn7xyMlK',
     'https://lh3.googleusercontent.com/d/1L-FC8D-aUENBwnqnOgMVHxMFWn1ML19u',
     'https://lh3.googleusercontent.com/d/1328hrQnYKU6l92PPgjjc2xBo6ONlOyqW',
@@ -120,6 +115,11 @@ const imageFilenames = [
     'https://lh3.googleusercontent.com/d/1qWOMaAkY8D2AtK4ckCQB8uIRSYXPBbH0',
     'https://lh3.googleusercontent.com/d/1DA0kpCp1_E8Bl1xZd4Rx-sYiJNqY9ib5',
     'https://lh3.googleusercontent.com/d/1daqcB2B1JWpOiJkySOcP1ebId5_ji2Zu',
+    'https://lh3.googleusercontent.com/d/1OcWjyPnmfnhY_DyRh26qKDW6YMjW_Bec',
+    'https://lh3.googleusercontent.com/d/1TXWrmT2nDjKVVr_v0b1-amSn2seC42-2',
+    'https://lh3.googleusercontent.com/d/1Oni9_1ySR5E1weUzZEpE1rUU9vEAxOj8',
+    'https://lh3.googleusercontent.com/d/1v9gqbQQnfajXeWmrXc-Pzjogn6ezTOBc',
+    'https://lh3.googleusercontent.com/d/1k3PRiNMLfeZYrIvywGoofURa3ZoSeEMI',
 ];
 
 let displayCounter = 5;
@@ -165,10 +165,10 @@ function showResult() {
     var data = {
         labels: [
             '製作陣の推し度',
-            'ロリ度',
-            '陽気',
-            '色気',
-            '清楚'
+            'ロリ',
+            '陽キャ',
+            'お色気',
+            '清楚系'
         ],
         datasets: [{
             label: false,
