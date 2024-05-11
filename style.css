@@ -10,9 +10,14 @@ canvas {
 }
 
 img {
-    transition: transform 0.1s ease, opacity 0.1s ease;
     box-shadow: 6px 5px 5px #ccc;
     border-radius: 5px;
     cursor: pointer;
     margin: 10px;
+}
+
+.img-hover {
+    opacity: .67;
+    transform: scale(1.1);
+    transition: opacity .3s ease, transform .3s ease;
 }
